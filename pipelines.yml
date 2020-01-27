@@ -6,7 +6,7 @@ resources:
       gitProvider: s_gitHub
       path: vijayreddy1991/dummy
       files:  # optional
-        include: k.*
+        include: p.*
         exclude: r.*
       branches:  # optional
         include: t.*
