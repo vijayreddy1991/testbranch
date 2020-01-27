@@ -6,7 +6,7 @@ resources:
       gitProvider: s_gitHub
       path: vijayreddy1991/test
       files:  # optional
-        include: p.*
+        include: \pipeline\/.+\s #p.*
         exclude: r.*
       branches:  # optional
         include: t.*
