@@ -4,7 +4,7 @@ resources:
     type: GitRepo
     configuration:
       gitProvider: s_gitHub
-      path: vijayreddy1991/dummy
+      path: vijayreddy1991/test
       files:  # optional
         include: p.*
         exclude: r.*
