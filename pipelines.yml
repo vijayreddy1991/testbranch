@@ -6,14 +6,11 @@ resources:
       gitProvider: s_gitHub
       path: vijayreddy1991/test
       files:  # optional
-        include: \pipeline\/.+\s #p.*
+        include: n.*
         exclude: r.*
-      branches:  # optional
-        include: t.*
-        exclude: r.*
-      tags:  # optional
-        include: v.*
-        exclude: m.*      
+#       branches:  # optional
+#         include: t.*
+#         exclude: r.*    
       buildOn:  # optional
         commit: true
 #          pullRequestCreate: true
@@ -22,13 +19,50 @@ resources:
         tagCreate: true
       shallowDepth: 1  # optional 
       
+  - name: gitresource1
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: vijayreddy1991/test
+#       files:  # optional
+#         include: \pipeline\/.+\s #p.*
+#         exclude: r.*
+      branches:  # optional
+        include: m.*
+        exclude: r.*     
+      buildOn:  # optional
+        commit: true
+#          pullRequestCreate: true
+#          pullRequestClose: true
+#          releaseCreate: true
+        tagCreate: true
+      shallowDepth: 1  # optional     
+      
+  - name: gitresource2
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: vijayreddy1991/test
+      files:  # optional
+        include: n.*
+        exclude: r.*
+      branches:  # optional
+        include: m.*
+        exclude: r.*     
+      buildOn:  # optional
+        commit: true
+#          pullRequestCreate: true
+#          pullRequestClose: true
+#          releaseCreate: true
+        tagCreate: true
+      shallowDepth: 1  # optional       
       
 pipelines:
 
-  - name: pipelines_true
+  - name: pipelines_files
   
     steps:
-      - name: s_BashTriggerTrue
+      - name: s_BashTriggerfiles
         type: Bash
         configuration:
           environmentVariables:
@@ -41,5 +75,43 @@ pipelines:
             - printenv 
             - pushd $res_gitresource_resourcePath
             - git log
+            - ls    
+            
+            
+  - name: pipelines_branch
+  
+    steps:
+      - name: s_BashTriggerbranch
+        type: Bash
+        configuration:
+          environmentVariables:
+            env1: value1
+            env2: value2
+          inputResources:
+            - name: gitresource1
+        execution:
+          onExecute:
+            - printenv 
+            - pushd $res_gitresource_resourcePath
+            - git log
             - ls
-            - cat pipelines.sh         
+            
+            
+  - name: pipelines_both
+  
+    steps:
+      - name: s_BashTriggerboth
+        type: Bash
+        configuration:
+          environmentVariables:
+            env1: value1
+            env2: value2
+          inputResources:
+            - name: gitresource2
+        execution:
+          onExecute:
+            - printenv 
+            - pushd $res_gitresource_resourcePath
+            - git log
+            - ls
+          
